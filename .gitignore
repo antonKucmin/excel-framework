@@ -1,2 +1,3 @@
-nodgit e_modules
 .idea
+nodgit e_modules
+dist
