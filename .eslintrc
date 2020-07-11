@@ -11,6 +11,10 @@
     "space-before-function-paren": "off",
     "comma-dangle": "off",
     "require-jsdoc": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "object-curly-spacing": "off",
+    "max-len": "off",
+    "operator-linebreak": "off",
+    "no-debugger": "off"
   }
 }
