@@ -19,22 +19,29 @@ function emptyCel () {
       .join('')
 }
 
-function createCel () {
+function createCel (el, index) {
   return `
-    <div class="cell" contenteditable></div>
+    <div class="cell" contenteditable data-col="${index}"></div>
   `
 }
 
-function createCol (col) {
+function createColumn(col, index) {
   return `
-    <div class="column">${col}</div>
+    <div class="column" data-type="resizable" data-col="${index}">
+      ${col}
+      <div class="col-resize" data-resize="col"></div>
+    </div>
   `
 }
 
 function createRow(content, index) {
+  const resize = index ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
-    <div class="row">
-      <div class="row-info">${index || ''}</div>
+    <div class="row" data-type="resizable">
+      <div class="row-info">
+        ${index || ''}
+        ${resize}
+       </div>
       <div class="row-data">${content}</div>
     </div>
   `
@@ -43,7 +50,7 @@ function createRow(content, index) {
 export function createTable (rowsCount = 15) {
   const rows = []
 
-  const cols = toChar().map(createCol).join('')
+  const cols = toChar().map(createColumn).join('')
   rows.push(createRow(cols))
 
   for (let i = 0; i < rowsCount; i++) {
