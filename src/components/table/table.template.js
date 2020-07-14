@@ -12,17 +12,25 @@ function toChar () {
   return chars
 }
 
-function emptyCel () {
+function emptyCel (row) {
   return new Array(colsCount)
       .fill('')
-      .map(createCel)
+      .map(createCel(row))
       .join('')
 }
 
-function createCel (el, index) {
-  return `
-    <div class="cell" contenteditable data-col="${index}"></div>
-  `
+function createCel (row) {
+  return function (_, col) {
+    return `
+      <div 
+      class="cell" 
+      contenteditable
+      data-col="${col}"
+      data-type="cell"
+      data-id="${row}:${col}"
+      ></div>
+    `
+  }
 }
 
 function createColumn(col, index) {
@@ -53,8 +61,8 @@ export function createTable (rowsCount = 15) {
   const cols = toChar().map(createColumn).join('')
   rows.push(createRow(cols))
 
-  for (let i = 0; i < rowsCount; i++) {
-    rows.push(createRow(emptyCel(), i + 1))
+  for (let row = 0; row < rowsCount; row++) {
+    rows.push(createRow(emptyCel(row), row + 1))
   }
   return rows.join('')
 }
