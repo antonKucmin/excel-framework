@@ -58,7 +58,9 @@
     white-space: nowrap;
     outline: none;
 
-
+    &:hover {
+      outline: 1px dashed $border-color;
+    }
     &.selected {
       border: none;
       outline: 2px solid $primary-color;
